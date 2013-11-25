@@ -15,7 +15,7 @@ class Todos extends ui.VerticalPanel {
   
   ui.CaptionPanel dePanel = new ui.CaptionPanel("LISTE DES CONTACTS");
   
-  Todos(Contacts contacts) {
+  Todos(Contacts contacts, MvcEntries mvcentries) {
     spacing = 10;
     ui.FlexTable layout = new ui.FlexTable();
     layout.setCellSpacing(6);
@@ -128,7 +128,7 @@ class Todos extends ui.VerticalPanel {
     hpanel.add(decPanel);
     
     //add(decPanel);
-    dePanel.setContentWidget(_listAff(contacts));
+    dePanel.setContentWidget(_listAff(contacts,mvcentries));
     dePanel.getElement().style.border = "2px solid #CC88CF";
     dePanel.getContentWidget().getElement().style.margin = "5px 10px 10px 10px";
     dePanel.getContentWidget().getElement().style.padding = "10px 10px 10px 10px";
@@ -152,13 +152,14 @@ class Todos extends ui.VerticalPanel {
   
  
   //---------------------Fonction pour afficher les contacts-------
-  ui.FlexTable _listAff(Contacts contacts){
+  ui.FlexTable _listAff(Contacts contacts, MvcEntries mvcentries){
    String json = window.localStorage['todos-dartling-dwt'];
-   if (json != null) {
+   ui.FlexTable layout = new ui.FlexTable();
+   if (json != null && json.length>3) {
      try {
         contacts.fromJson(JSON.decode(json));
         
-          ui.FlexTable layout = new ui.FlexTable();
+          
           layout.setCellSpacing(6);
           ui.FlexCellFormatter cellFormatter = layout.getFlexCellFormatter();
 
@@ -224,11 +225,18 @@ class Todos extends ui.VerticalPanel {
           i++;
         }
    
-    return layout;
+    
     } on Exception catch(e) {
       print(e);
     }
-   }
+   }else{ 
+     initContactMvc(mvcentries);
+     save(mvcentries.contacts);
+     contacts=mvcentries.contacts;
+     //window.location.reload();
+     layout=_listAffDir(contacts);
+     }
+   return layout;
    } 
   
   ui.FlexTable _listAffDir(Contacts contacts){
