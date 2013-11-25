@@ -31,7 +31,15 @@ class TodoApp {
     rootPanel.add(vPanel);
     var title = new ui.Label('Todos');
     vPanel.add(title);
+<<<<<<< HEAD
+<<<<<<< HEAD
+    var todos = new Todos(contacts,model);
+=======
     var todos = new Todos(contacts);
+>>>>>>> 89de64cc7d9e87b6f6957c78eb708f6832cccdd5
+=======
+    var todos = new Todos(contacts);
+>>>>>>> 1c3095a2814918660d82107a3b2bb1b3dfe7613e
     vPanel.add(todos);
 
     //header = new Header(this);
