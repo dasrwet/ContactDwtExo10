@@ -17,6 +17,8 @@ _initContacts(var entries) {
   contact1.email = 'doscodj@hotmail.com';
   contact1.adresse = 'gbegamey carre 752 benin';
   
+  entries.contacts.add(contact1);
+  
   Contact contact2 = new Contact(entries.contacts.concept);
   contact2.cles = 'HA2AG';
   contact2.nom = 'AGROI';
